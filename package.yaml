@@ -21,6 +21,9 @@ description:         Please see the README on GitHub at <https://github.com/WhoM
 
 dependencies:
 - base >= 4.7 && < 5
+- slack-web >= 0.2.0 && < 0.2.1
+- transformers >= 0.5.5 && < 0.6
+- text == 1.2.*
 
 library:
   source-dirs: src
