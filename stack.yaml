@@ -65,6 +65,7 @@ extra-deps:
 - base-orphans-0.8.2@sha256:40ef37ed043aac2cbb6c538fdebfc62e601ee65ee161e4a6327452133b574d7e,2958
 - dec-0.0.3@sha256:c0a3ddaf4c989e2a3d83f91dbe0e70db75a16aad9b24ab8312ceab8af9f2b325,1131
 - splitmix-0.0.3@sha256:455de9326ae5bbe5492cbb140fefb04cf988501e25b204dabaf755ab67400d9d,4835
+- json-0.10@sha256:b56b1f5f1e17d11e6bcf754ea7f0243a87e224a17608dcd20f331a1909be2e25,3188
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

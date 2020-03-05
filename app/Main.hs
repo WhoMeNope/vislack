@@ -1,28 +1,61 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveDataTypeable #-}
 
 module Main where
 
 import System.Environment (lookupEnv)
+import System.IO (readFile)
+import System.Directory (getHomeDirectory)
+import Control.Monad (mapM_)
+import Control.Monad.Trans.Class (lift)
 import Control.Monad.Trans.Reader
-import Data.Text (pack)
+import Data.Text (pack, unpack)
+import Text.JSON.Generic
+import Web.Slack.Channel
 import qualified Web.Slack as Slack
-import qualified Web.Slack.Api as Api
+
+data Config = Config
+    { slack_token  :: String
+    } deriving (Show, Data, Typeable)
 
 tokenEnvKey = "SLACK_TOKEN"
+configPath = "/.slack-term"
 
 main :: IO ()
 main = do
   -- Try getting slack token from env
   maybeToken <- lookupEnv tokenEnvKey
   case maybeToken of
-    Nothing -> putStrLn "No slack token found in env."
+    Nothing -> do
+      putStrLn "No slack token found in env."
+
+      -- Read config file
+      home <- getHomeDirectory
+      configFile <- readFile (home <> configPath)
+      let config = decodeJSON configFile :: Config
+
+      runApp (slack_token config)
 
     -- If a token was found, start the app
     Just token -> do
-      putStrLn "Got slack token."
+      putStrLn "Got slack token from env."
 
-      slackConfig <- Slack.mkSlackConfig (pack token)
+      runApp token
 
-      putStrLn "Running app"
-      _ <- flip runReaderT slackConfig (Slack.apiTest Api.mkTestReq)
-      putStrLn "Succesfully ran app"
+runApp :: String -> IO ()
+runApp token = do
+  slackConfig <- Slack.mkSlackConfig (pack token)
+
+  putStrLn "Running app"
+  _ <- flip runReaderT slackConfig app
+  putStrLn "Succesfully ran app"
+
+app :: ReaderT Slack.SlackConfig IO ()
+app = do
+  eRes <- Slack.channelsList $ ListReq Nothing Nothing
+  lift $ case eRes of
+    Left error -> putStrLn $ show error
+    Right listResp -> do
+      let channels = listRspChannels listResp
+      mapM_ (putStrLn . unpack . channelName) channels
+  return ()
