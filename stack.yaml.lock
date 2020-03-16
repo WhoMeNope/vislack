@@ -5,12 +5,19 @@
 
 packages:
 - completed:
-    hackage: slack-web-0.2.0.11@sha256:c42cb6654cbde5761234dca7dbf6ad6784dfdafb556d2b4400f8c3602c03b791,2103
+    cabal-file:
+      size: 2132
+      sha256: f5dfab8b111ac52a0555805d31403b236d4deeb15692b26963a9c63acf3f44a9
+    name: slack-web
+    version: 0.2.0.11
+    git: https://github.com/WhoMeNope/slack-web
     pantry-tree:
-      size: 1136
-      sha256: 343ea32a6b6610a7f92c73150215f26fe1243b57165458f80297e481e1a47f6d
+      size: 1524
+      sha256: 551d9141eff273ba29bc5b59f157e932837aa40c246c7ce2dcd41d966e8ce57e
+    commit: 8b9172ccbd56b4527254be38cccb82ee155405fb
   original:
-    hackage: slack-web-0.2.0.11@sha256:c42cb6654cbde5761234dca7dbf6ad6784dfdafb556d2b4400f8c3602c03b791,2103
+    git: https://github.com/WhoMeNope/slack-web
+    commit: 8b9172ccbd56b4527254be38cccb82ee155405fb
 - completed:
     hackage: aeson-1.4.6.0@sha256:560575b008a23960403a128331f0e59594786b5cd19a35be0cd74b9a7257958e,6980
     pantry-tree:
