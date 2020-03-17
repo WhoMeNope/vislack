@@ -11,7 +11,8 @@ import Control.Monad.Trans.Class (lift)
 import Control.Monad.Trans.Reader
 import Data.Text (pack, unpack)
 import Text.JSON.Generic
-import Web.Slack.Channel
+
+import Web.Slack.Conversation
 import qualified Web.Slack as Slack
 
 data Config = Config
@@ -33,6 +34,7 @@ main = do
       home <- getHomeDirectory
       configFile <- readFile (home <> configPath)
       let config = decodeJSON configFile :: Config
+      putStrLn "Got slack token from config file."
 
       runApp (slack_token config)
 
@@ -45,17 +47,15 @@ main = do
 runApp :: String -> IO ()
 runApp token = do
   slackConfig <- Slack.mkSlackConfig (pack token)
-
-  putStrLn "Running app"
   _ <- flip runReaderT slackConfig app
-  putStrLn "Succesfully ran app"
+  return ()
 
 app :: ReaderT Slack.SlackConfig IO ()
 app = do
-  eRes <- Slack.channelsList $ ListReq Nothing Nothing
+  eRes <- Slack.usersConversations
   lift $ case eRes of
     Left error -> putStrLn $ show error
     Right listResp -> do
       let channels = listRspChannels listResp
-      mapM_ (putStrLn . unpack . channelName) channels
+      mapM_ (putStrLn . unpack . conversationId) channels
   return ()
