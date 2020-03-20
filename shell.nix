@@ -7,6 +7,8 @@ let
 
     ref = "nixos-unstable";
   }) {};
+
+  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
 in
 
 # This allows overriding pkgs by passing `--arg pkgs ...`
@@ -17,6 +19,7 @@ with pkgs;
 mkShell {
   buildInputs = [
     stack
+    (all-hies.selection { selector = p: { inherit (p) ghc844; }; })
   ];
   shellHook = ''
     unset NIX_SSL_CERT_FILE
