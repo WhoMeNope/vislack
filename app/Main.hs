@@ -52,10 +52,11 @@ runApp token = do
 
 app :: ReaderT Slack.SlackConfig IO ()
 app = do
-  eRes <- Slack.usersConversations $ ListReq Nothing Nothing
+  eRes <- Slack.usersConversations $ ListReq
+    (Just True) (Just [TypePublicChannel, TypePrivateChannel, TypeIm, TypeMpim])
   lift $ case eRes of
     Left error -> putStrLn $ show error
     Right listResp -> do
       let channels = listRspChannels listResp
-      mapM_ (putStrLn . unpack . conversationName) channels
+      mapM_ (putStrLn . show) channels
   return ()

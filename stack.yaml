@@ -45,7 +45,7 @@ packages:
 #
 extra-deps:
 - git: https://github.com/WhoMeNope/slack-web
-  commit: bdf07851d18e2d6a0d1500c098ac11905131581d
+  commit: 6d4ab82c3f1f4a613a8e7a441672310bb5fae2d9
 - aeson-1.4.6.0@sha256:560575b008a23960403a128331f0e59594786b5cd19a35be0cd74b9a7257958e,6980
 - errors-2.3.0@sha256:e76c5af088c70c36f772a7e2b88a47abf327f39ee32fd18da4d4464c44463ae9,1371
 - http-api-data-0.4.1.1@sha256:6301283e18ac95f3bde796ded39269c8d3c83818fe49a1a9d4a7bc2387c453fd,3670
