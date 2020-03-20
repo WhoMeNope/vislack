@@ -13,11 +13,11 @@ packages:
     git: https://github.com/WhoMeNope/slack-web
     pantry-tree:
       size: 1230
-      sha256: e23c81c65d01fdf5a55112cccea932c51dcbd9657b21759c77dffc20dd89d186
-    commit: 6d4ab82c3f1f4a613a8e7a441672310bb5fae2d9
+      sha256: 82d5b0a72bf7fee8d93d917ac3f50f9ed681bcbc0b84c8e14033621530a51e0e
+    commit: cdd9edfa3f123cffb70e3e3cf7955eefaef66cb9
   original:
     git: https://github.com/WhoMeNope/slack-web
-    commit: 6d4ab82c3f1f4a613a8e7a441672310bb5fae2d9
+    commit: cdd9edfa3f123cffb70e3e3cf7955eefaef66cb9
 - completed:
     hackage: aeson-1.4.6.0@sha256:560575b008a23960403a128331f0e59594786b5cd19a35be0cd74b9a7257958e,6980
     pantry-tree:
